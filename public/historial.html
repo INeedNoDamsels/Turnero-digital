@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Historial de turnos</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f4f4;
+            color: #111;
+        }
+
+        .contenedor {
+            width: 92%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 35px 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 0 0 30px;
+            font-size: 36px;
+        }
+
+        .controles {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            display: flex;
+            align-items: end;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .campo {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .campo label {
+            font-weight: bold;
+        }
+
+        .campo input,
+        .campo select {
+            height: 45px;
+            padding: 0 12px;
+            border: 2px solid #111;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            height: 45px;
+            padding: 0 20px;
+            border: none;
+            border-radius: 8px;
+            background: #111;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: default;
+        }
+
+        .tabla-contenedor {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 13px 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            white-space: nowrap;
+        }
+
+        th {
+            background: #666;
+            color: white;
+        }
+
+        .sin-resultados {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-size: 20px;
+        }
+
+        .resumen {
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 700px) {
+            .controles {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .campo input,
+            .campo select,
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <h1>Historial de turnos</h1>
+
+        <div class="controles">
+
+            <div class="campo">
+                <label for="fecha">
+                    Fecha
+                </label>
+
+                <input
+                    type="date"
+                    id="fecha"
+                >
+            </div>
+
+            <div class="campo">
+                <label for="estado">
+                    Estado
+                </label>
+
+                <select id="estado">
+                    <option value="TODOS">
+                        Todos
+                    </option>
+
+                    <option value="ESPERANDO">
+                        Esperando
+                    </option>
+
+                    <option value="LLAMADO">
+                        Llamado
+                    </option>
+
+                    <option value="FINALIZADO">
+                        Finalizado
+                    </option>
+                </select>
+            </div>
+
+            <button id="buscar">
+                BUSCAR
+            </button>
+
+            <button id="exportar">
+                EXPORTAR CSV
+            </button>
+
+        </div>
+
+        <div class="tabla-contenedor">
+
+            <div
+                id="resumen"
+                class="resumen"
+            ></div>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Turno</th>
+                        <th>Tipo</th>
+                        <th>Hora generado</th>
+                        <th>Hora llamado</th>
+                        <th>Piso</th>
+                        <th>PC</th>
+                        <th>Hora finalizado</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tabla"></tbody>
+
+            </table>
+
+            <div
+                id="sinResultados"
+                class="sin-resultados"
+                style="display: none;"
+            >
+                No hay turnos para esta fecha.
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="/historial.js"></script>
+
+</body>
+</html>

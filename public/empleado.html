@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Panel de atención</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f4f4;
+            color: #111;
+        }
+
+        .contenedor {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        h1 {
+            margin: 0 0 30px;
+            text-align: center;
+            font-size: 36px;
+        }
+
+        .turno-actual {
+            background: white;
+            border-radius: 12px;
+            padding: 25px 30px;
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .turno-actual h2 {
+            margin: 0 0 15px;
+            font-size: 28px;
+        }
+
+        #numeroActual {
+            font-size: 64px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }   
+
+        #pisoActual {
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .boton-finalizar {
+            border: 2px solid #111;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            background: white;
+            color: #111;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .boton-finalizar:disabled {
+            opacity: 0.5;
+            cursor: default;
+        }
+
+        .colas {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .cola {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .cola h2 {
+            margin: 0 0 20px;
+            font-size: 28px;
+        }
+
+        .turno {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 15px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .turno:last-child {
+            border-bottom: none;
+        }
+
+        .numero {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .boton-llamar {
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            background: #111;
+            color: white;
+        }
+
+        .sin-turnos {
+            color: #666;
+            font-size: 18px;
+        }
+
+        @media (max-width: 700px) {
+            .colas {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <h1>Panel de atención</h1>
+
+        <div class="turno-actual">
+
+            <h2>Turno actual</h2>
+
+            <div id="numeroActual">
+                -
+            </div>
+
+            <div id="pisoActual">
+                Seleccioná un turno para comenzar
+            </div>
+
+            <button
+                class="boton-finalizar"
+                id="finalizar"
+                disabled
+            >
+                FINALIZAR ATENCIÓN
+            </button>
+
+        </div>
+
+        <div class="colas">
+
+            <div class="cola">
+
+                <h2>Reservas</h2>
+
+                <div id="listaReservas"></div>
+
+            </div>
+
+            <div class="cola">
+
+                <h2>Cotizaciones</h2>
+
+                <div id="listaCotizaciones"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="/empleado.js"></script>
+
+</body>
+</html>

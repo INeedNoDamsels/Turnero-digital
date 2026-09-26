@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Turnero Hertz</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #F4F4F4;
+            color: #111;
+            overflow: hidden;
+        }
+
+        .contenedor {
+            width: 90%;
+            max-width: 800px;
+            height: 100vh;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .zona-logo {
+            width: 100%;
+            height: 220px;
+            min-height: 220px;
+            flex: 0 0 220px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            width: 380px;
+            max-width: 80%;
+            height: auto;
+            display: block;
+        }
+
+        .contenido {
+            width: 100%;
+            flex: 1;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .botones,
+        .pantalla-turno {
+            width: 100%;
+        }
+
+        .botones {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h2 {
+            margin: 0 0 35px 0;
+            font-size: 30px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .boton {
+            width: 100%;
+            max-width: 500px;
+            min-height: 100px;
+            margin-bottom: 25px;
+            border: 2px solid #111;
+            border-radius: 12px;
+            background: white;
+            color: #111;
+            font-size: 26px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .boton .traduccion {
+            display: block;
+            margin-top: 6px;
+            font-size: 18px;
+            font-style: italic;
+            font-weight: normal;
+        }
+
+        .boton:disabled {
+            opacity: 0.6;
+            cursor: default;
+        }
+
+        .pantalla-turno {
+            display: none;
+            text-align: center;
+        }
+
+        .pantalla-turno h2 {
+            margin-bottom: 25px;
+        }
+
+        #numeroTurno {
+            font-size: 80px;
+            font-weight: bold;
+            margin: 10px 0 30px 0;
+        }
+
+        .mensaje-turno {
+            font-size: 24px;
+            line-height: 1.5;
+            margin: 0 0 35px 0;
+        }
+
+        .mensaje-turno .traduccion {
+            font-size: 18px;
+            font-style: italic;
+        }
+
+        #volverInicio {
+            width: 100%;
+            max-width: 500px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <div class="zona-logo">
+            <img
+                src="/main-logo.svg"
+                alt="Hertz"
+                class="logo"
+            >
+        </div>
+
+        <div class="contenido">
+
+            <div class="botones">
+
+                <h2>
+                    ¿Cómo podemos ayudarte?
+                    <br>
+                    <span style="font-size: 20px; font-style: italic; font-weight: normal;">
+                        How can we help you?
+                    </span>
+                </h2>
+
+                <button
+                    class="boton"
+                    data-tipo="R"
+                >
+                    Tengo reserva
+                    <span class="traduccion">
+                        I have a reservation
+                    </span>
+                </button>
+
+                <button
+                    class="boton"
+                    data-tipo="C"
+                >
+                    Quiero cotizar
+                    <span class="traduccion">
+                        I want a quote
+                    </span>
+                </button>
+
+            </div>
+
+            <div
+                class="pantalla-turno"
+                id="pantallaTurno"
+            >
+
+                <h2>
+                    Tu turno es
+                </h2>
+
+                <div id="numeroTurno">
+                    R-001
+                </div>
+
+                <p class="mensaje-turno">
+                    Por favor, aguardá a ser llamado.
+                    <br>
+                    <span class="traduccion">
+                        Please wait to be called.
+                    </span>
+                </p>
+
+                <button
+                    class="boton"
+                    id="volverInicio"
+                >
+                    Volver al inicio
+                    <span class="traduccion">
+                        Back to home
+                    </span>
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="/kiosco.js"></script>
+
+</body>
+</html>
