@@ -55,5 +55,3 @@ Cada turno conserva información sobre su recorrido dentro del sistema:
 - Estado
 
 El historial permite filtrar la información por fecha y estado, además de exportar los datos para su posterior análisis.
-
-👉 [Ver presentación del proyecto](./presentacion.pptx)
