@@ -72,6 +72,10 @@ async function obtenerTurnos() {
     return await respuesta.json();
 }
 
+/**
+ * Recupera el turno que está siendo atendido actualmente por este puesto.
+ * @returns {Promise<void>} Una promesa que se resuelve cuando se ha recuperado el turno actual.
+ */
 async function recuperarTurnoActual() {
     try {
         const respuesta = await fetch(
