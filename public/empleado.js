@@ -72,6 +72,50 @@ async function obtenerTurnos() {
     return await respuesta.json();
 }
 
+async function recuperarTurnoActual() {
+    try {
+        const respuesta = await fetch(
+            "/api/turnos/llamados",
+            {
+                cache: "no-store"
+            }
+        );
+
+        if (!respuesta.ok) throw new Error("No fue posible recuperar el turno actual");
+
+        const turnos = await respuesta.json();
+
+        const turno = turnos.find(
+            (item) =>
+                Number(item.piso) === pisoSeleccionado &&
+                Number(item.puesto) === puestoSeleccionado
+        );
+
+        if (!turno) {
+            turnoActual = null;
+
+            numeroActual.textContent = "-";
+
+            pisoActual.textContent = `Piso ${pisoSeleccionado} - PC ${puestoSeleccionado}`;
+
+            botonFinalizar.disabled = true;
+
+            return;
+        }
+
+        turnoActual = turno;
+
+        numeroActual.textContent = turno.turno;
+
+        pisoActual.textContent = `Piso ${turno.piso} - PC ${turno.puesto}`;
+
+        botonFinalizar.disabled = false;
+
+    } catch (error) {
+        console.error("Error al recuperar el turno actual:", error);
+    }
+}
+
 /**
  * Crea un elemento HTML para representar un turno.
  *
@@ -249,7 +293,7 @@ async function actualizarPeriodicamente() {
 /**
  * Inicializa el panel del empleado.
  */
-function iniciar() {
+async function iniciar() {
     validarPuesto();
 
     configurarInterfaz();
@@ -258,6 +302,8 @@ function iniciar() {
         "click",
         finalizarTurno
     );
+
+    await recuperarTurnoActual();
 
     actualizarPeriodicamente();
 }
